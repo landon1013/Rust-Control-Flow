@@ -1,3 +1,16 @@
+#![allow(dead_code)]
+#![allow(unused_imports)]
+#![allow(unused_must_see)]
+
+//use rand::Rng;
+use std::io::stdin;
+
+enum State {
+    Locked,
+    Failed,
+    Unlocked
+}
+
 fn if_statement() {
     let temp = 28;
 
@@ -80,9 +93,49 @@ fn match_statement() {
     println!("Is it true? {}", s);
 }
 
+fn combination_lock() {
+    let code = String::from("1234");
+    let mut state = State::Locked;
+    let mut entry = String::new();
+
+    loop {
+        match state {
+            State::Locked => {
+                let mut input = String::new();
+                match stdin().read_line(&mut input) {
+                    Ok(_) => {
+                        entry.push_str(&input.trim_end());
+                    }
+                    Err(_) => continue
+                }
+
+                if entry == code {
+                    state = State::Unlocked;
+                    continue;
+                }
+
+                if !code.starts_with(&entry) {
+                    state = State::Failed;
+                }
+            }
+            State::Failed => {
+                println!("FAILED");
+                entry.clear(); // ""
+                state = State::Locked;
+                continue;
+            }
+            State::Unlocked => {
+                println!("UNLOCKED");
+                return;
+            }
+        }
+    }
+}
+
 fn main() {
     //if_statement();
     // while_and_loop();
     //for_loop();
-    match_statement();
+    //match_statement();
+    combination_lock();
 }
