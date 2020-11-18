@@ -55,8 +55,34 @@ fn for_loop() {
     }
 }
 
+fn match_statement() {
+    let country_code = 44;
+
+    let country = match country_code {
+        44 => "UK",
+        46 => "Sweden",
+        7 => "Russia",
+        1 => "United States of America",
+        2..=1000 => "Unknown",
+        _ => "invalid"
+    };
+
+    println!("The country with code {} is {}",
+        country_code, country);
+
+    let x = false;
+    
+    let s = match x {
+        true => "yes",
+        false => "no"
+    };
+
+    println!("Is it true? {}", s);
+}
+
 fn main() {
     //if_statement();
     // while_and_loop();
-    for_loop();
+    //for_loop();
+    match_statement();
 }
