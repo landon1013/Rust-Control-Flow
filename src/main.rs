@@ -2,7 +2,6 @@
 #![allow(unused_imports)]
 #![allow(unused_must_see)]
 
-//use rand::Rng;
 use std::io::stdin;
 
 enum State {
